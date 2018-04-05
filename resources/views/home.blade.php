@@ -42,6 +42,7 @@ if (isset($_SESSION[$tokenSessionKey])) {
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
     $htmlBody = <<<END
+<h3>Search for channel:</h3>
 <form method="GET">
   <div>
     Search Term: <input type="search" id="q" name="q" placeholder="Enter Search Term">
