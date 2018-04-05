@@ -42,30 +42,14 @@ $htmlBody = "";
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
 
-    if (isset($_GET['q'])) {
+    if (isset($_GET['videoId'])) {
         try {
-
-            $broadcastsResponse = $youtube->search->listSearch('id,snippet', array(
-            'channelId' => $_GET['q'], 
-            'eventType' => 'live',
-            'type' => 'video'));
-
-            $htmlBody .= "<h3>Live Broadcasts</h3><ul>";
-            foreach ($broadcastsResponse['items'] as $broadcastItem) {
-                $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
-                    'id,snippet',
-                    array(
-                        'id' => $broadcastItem['id']['videoId']
-                    )
-                );
-
-                $bcastItem = $bcastsResponse['items'][0];
-
-                $ref = filter_var('http://' . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $bcastItem['snippet']['liveChatId'] . "&videoId=" . $broadcastItem['id']['videoId'], FILTER_SANITIZE_URL);
-
-                $htmlBody .= sprintf("<li><a href='"."".$ref."'>%s</a></li>", $bcastItem['snippet']['title']);
-            }
-            $htmlBody .= '</ul>';
+                $src="https://www.youtube.com/embed/" . $_GET['videoId'];
+                $htmlBody .= <<<END
+                <iframe width="420" height="315"
+                src="$src">
+                </iframe>
+END;
         } catch (Google_Service_Exception $e) {
         $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
         htmlspecialchars($e->getMessage()));

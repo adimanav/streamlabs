@@ -18,3 +18,7 @@ Route::get('/', function () {
 Route::get('/broadcasts', function () {
     return view('broadcasts');
 });
+
+Route::get('/watch', function () {
+    return view('watch');
+});
