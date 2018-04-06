@@ -7,6 +7,8 @@ class ApiController extends Controller
 {
     public function listMessages($liveChatId, $pageToken="")
     {
+        session_start();
+        
         $result = array();
 
         $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
