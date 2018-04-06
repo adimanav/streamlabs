@@ -62,25 +62,32 @@ $htmlBody = "";
 
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
-    $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
-        'id,snippet,contentDetails',
-        array(
-            'broadcastStatus' => 'active'
-        )
-    );
+//    $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
+//        'id,snippet,contentDetails',
+//        array(
+//            'broadcastStatus' => 'active'
+//        )
+//    );
 
-    if (count($bcastsResponse['items']) > 0) {
-        $item = $bcastsResponse['items'][0];
-        $liveChatId = $item['snippet']['liveChatId'];
-        $boundStreamId = $item['contentDetails']['boundStreamId'];
+    $broadcastsResponse = $youtube->search->listSearch('id,snippet', array(
+        'eventType' => 'live',
+        'type' => 'video',
+        'maxResults' => 1,
+    ));
 
-        $streamsResp = $youtube->liveStreams->listLiveStreams(
-            'id,snippet,cdn',
+    if (count($broadcastsResponse['items']) > 0) {
+        $item = $broadcastsResponse['items'][0];
+
+        $videoId = $item['id']['videoId'];
+
+        $videoResp = $youtube->videos->listVideos(
+            'snippet,contentDetails,statistics,liveStreamingDetails',
             array(
-                'id' => $boundStreamId
+                'id' => $videoId,
             )
         );
-        $streamName = $streamsResp['cdn']['ingestionInfo']['streamName'];
+
+        $liveChatId = $videoResp['items'][0]['liveStreamingDetails']['activeLiveChatId'];
 
         $url = filter_var(
             $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
