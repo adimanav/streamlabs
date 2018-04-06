@@ -59,7 +59,7 @@ if ($client->getAccessToken()) {
                     )
                 );
 
-                if ($bcastsResponse['items'].length > 0) {
+                if ($bcastsResponse['items'].count() > 0) {
                     $bcastItem = $bcastsResponse['items'][0];
 
                     $ref = filter_var('http://' . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $bcastItem['snippet']['liveChatId'] . "&videoId=" . $broadcastItem['id']['videoId'], FILTER_SANITIZE_URL);
