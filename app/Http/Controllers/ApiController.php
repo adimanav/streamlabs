@@ -1,7 +1,4 @@
 <?php
-namespace {
-    require_once 'vendor/autoload.php';
-}
 
 namespace App\Http\Controllers {
 
@@ -11,7 +8,7 @@ namespace App\Http\Controllers {
     {
         public function listMessages($liveChatId, $pageToken = "")
         {
-            $result = array();;
+            $result = array();
 
             $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
             $OAUTH2_CLIENT_SECRET = 'z2v75CLEqjxdD9Pv0u7ddftD';
