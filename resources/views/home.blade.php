@@ -61,9 +61,9 @@ if (isset($_SESSION[$tokenSessionKey])) {
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
     $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
-        'id,snippet',
+        'id,snippet,contentDetails',
         array(
-            'mine' => true
+            'broadcastStatus' => 'active'
         )
     );
 
@@ -73,7 +73,7 @@ if ($client->getAccessToken()) {
         $boundStreamId = $item['contentDetails']['boundStreamId'];
 
         $streamsResp = $youtube->liveStreams->listLiveStreams(
-            'id,snippet',
+            'id,snippet,cdn',
             array(
                 'id' => $boundStreamId
             )
