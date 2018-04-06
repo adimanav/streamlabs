@@ -28,11 +28,6 @@
             "App\\": "app/"
         }
     },
-    "autoload": {
-        "classmap": [
-            "vendor/google/apiclient/src/Google"
-        ],
-    },
     "autoload-dev": {
         "psr-4": {
             "Tests\\": "tests/"
