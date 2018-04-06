@@ -14,12 +14,12 @@ else {
 }
 
 
-function redirect($url) {
-    ob_start();
-    header('Location: '.$url);
-    ob_end_flush();
-    die();
-}
+//function redirect($url) {
+//    ob_start();
+//    header('Location: '.$url);
+//    ob_end_flush();
+//    die();
+//}
 
 /*
  * You can acquire an OAuth 2.0 client ID and client secret from the
@@ -84,7 +84,7 @@ if ($client->getAccessToken()) {
             $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
             FILTER_SANITIZE_URL);
 
-        $redirect($url);
+        redirect($url);
     }
 } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
   $htmlBody = <<<END
