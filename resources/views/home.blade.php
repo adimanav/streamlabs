@@ -86,7 +86,7 @@ if ($client->getAccessToken()) {
             $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
             FILTER_SANITIZE_URL);
 
-?><script type="text/javascript">alert(<?php echo $url; ?>);</script><?php
+?><script type="text/javascript">alert("<?php echo $url; ?>");</script><?php
 
         return redirect()->to($url);
 
