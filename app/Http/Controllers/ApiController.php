@@ -14,7 +14,7 @@ class ApiController extends Controller
         $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
         $OAUTH2_CLIENT_SECRET = 'z2v75CLEqjxdD9Pv0u7ddftD';
 
-        $client = new Google_Client();
+//        $client = new Google_Client();
 //        $client->setClientId($OAUTH2_CLIENT_ID);
 //        $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 //        $client->setScopes('https://www.googleapis.com/auth/youtube');
