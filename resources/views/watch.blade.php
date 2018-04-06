@@ -99,7 +99,8 @@ END;
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
                         var items = data['items'];
-                        for (var item in items) {
+                        for (var i = 0; i < Array.length(items); i++) {
+                            var item = items[i];
                             $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
                         }
                         document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
