@@ -1,5 +1,9 @@
 <?php
 
+namespace {
+    session_start();
+}
+
 namespace App\Http\Controllers {
 
     use app\LiveChatMessage;
