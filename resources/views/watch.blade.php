@@ -116,12 +116,19 @@ END;
     </script>
 </head>
 <body onload="setInterval('updateChat()', pollingIntervalMillis)">
+    <table>
+        <tr>
+            <td>
   <?=$htmlBody?>
+            </td>
+            <td>
   <div id="page-wrap">
 
       <div id="chat-wrap"><div id="chat-area"></div></div>
 
   </div>
-
+            </td>
+        </tr>
+    </table>
 </body>
 </html>
