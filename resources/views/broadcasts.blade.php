@@ -59,11 +59,13 @@ if ($client->getAccessToken()) {
                     )
                 );
 
-                $bcastItem = $bcastsResponse['items'][0];
+                if ($bcastsResponse['items'].length > 0) {
+                    $bcastItem = $bcastsResponse['items'][0];
 
-                $ref = filter_var('http://' . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $bcastItem['snippet']['liveChatId'] . "&videoId=" . $broadcastItem['id']['videoId'], FILTER_SANITIZE_URL);
+                    $ref = filter_var('http://' . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $bcastItem['snippet']['liveChatId'] . "&videoId=" . $broadcastItem['id']['videoId'], FILTER_SANITIZE_URL);
 
-                $htmlBody .= sprintf("<li><a href='"."".$ref."'>%s</a></li>", $bcastItem['snippet']['title']);
+                    $htmlBody .= sprintf("<li><a href='"."".$ref."'>%s</a></li>", $bcastItem['snippet']['title']);
+                }
             }
             $htmlBody .= '</ul>';
         } catch (Google_Service_Exception $e) {
