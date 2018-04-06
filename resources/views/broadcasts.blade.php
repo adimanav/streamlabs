@@ -90,8 +90,8 @@ END;
 
   $authUrl = $client->createAuthUrl();
   $htmlBody = <<<END
-  <h3>Authorization Required</h3>
-  <p>You need to <a href="$authUrl">authorize access</a> before proceeding.<p>
+  <h3>Google Authorization Required</h3>
+  <p>You need to <a href="$authUrl">click here</a> to proceed.<p>
 END;
 }
 ?>

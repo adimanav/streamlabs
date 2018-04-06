@@ -42,7 +42,7 @@ if (isset($_SESSION[$tokenSessionKey])) {
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
     $htmlBody = <<<END
-<h3>Search for channel:</h3>
+<h3>Search for the channel first and then you will be able to select a live broadcast on that channel:</h3>
 <form method="GET">
   <div>
     Search Term: <input type="search" id="q" name="q" placeholder="Enter Search Term">
@@ -112,8 +112,8 @@ END;
 
   $authUrl = $client->createAuthUrl();
   $htmlBody = <<<END
-  <h3>Authorization Required</h3>
-  <p>You need to <a href="$authUrl">authorize access</a> before proceeding.<p>
+  <h3>Google Authorization Required</h3>
+  <p>You need to <a href="$authUrl">click here</a> to proceed.<p>
 END;
 }
 ?>
