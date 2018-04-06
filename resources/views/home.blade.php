@@ -58,6 +58,8 @@ if (isset($_SESSION[$tokenSessionKey])) {
   $client->setAccessToken($_SESSION[$tokenSessionKey]);
 }
 
+$htmlBody = "";
+
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
     $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
