@@ -8,7 +8,7 @@ class ApiController extends Controller
     public function listMessages($liveChatId, $pageToken="")
     {
         session_start();
-        
+
         $result = array();
 
         $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
@@ -31,7 +31,7 @@ class ApiController extends Controller
         }
 
         // Check to ensure that the access token was successfully acquired.
-        if ($client->getAccessToken()) {
+//        if ($client->getAccessToken()) {
 //            $arr = array();
 //            if ($pageToken !== "") {
 //                $arr['pageToken'] = $pageToken;
