@@ -88,7 +88,7 @@ END;
     <script type="text/javascript">
         var instanse = false;
         var nextPageToken = "";
-        var pollingIntervalMillis = 3000;
+        var pollingIntervalMillis = 4000;
         var currdata;
 
         function updateChat(){
@@ -98,6 +98,7 @@ END;
                     if (status == 'success') {
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
+                        pollingIntervalMillis = data['pollingIntervalMillis']
                         var items = data['items'];
                         for (var i = 0; i < items.length; i++) {
                             var item = items[i];
