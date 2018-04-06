@@ -1,5 +1,21 @@
 <?php
 
+$url = parse_url(getenv("CLEARDB_DATABASE_URL"));
+
+$server = $url["host"];
+$port = $url["port"];
+$username = $url["user"];
+$password = $url["pass"];
+$db = substr($url["path"], 1);
+
+$redisurl = parse_url(getenv("REDIS_URL"));
+$redisserver = $redisurl["host"];
+$redisusername = $redisurl["user"];
+$redisport = $redisurl["port"];
+$redispassword = $redisurl["pass"];
+
+$conn = new mysqli($server, $username, $password, $db);
+
 return [
 
     /*
@@ -41,11 +57,11 @@ return [
 
         'mysql' => [
             'driver' => 'mysql',
-            'host' => env('DB_HOST', '127.0.0.1'),
-            'port' => env('DB_PORT', '3306'),
-            'database' => env('DB_DATABASE', 'forge'),
-            'username' => env('DB_USERNAME', 'forge'),
-            'password' => env('DB_PASSWORD', ''),
+            'host' => $host, //env('DB_HOST', '127.0.0.1'),
+            'port' => $port, //env('DB_PORT', '3306'),
+            'database' => $db, //env('DB_DATABASE', 'forge'),
+            'username' => $username, //env('DB_USERNAME', 'forge'),
+            'password' => $password, //env('DB_PASSWORD', ''),
             'unix_socket' => env('DB_SOCKET', ''),
             'charset' => 'utf8mb4',
             'collation' => 'utf8mb4_unicode_ci',
@@ -109,9 +125,9 @@ return [
         'client' => 'predis',
 
         'default' => [
-            'host' => env('REDIS_HOST', '127.0.0.1'),
-            'password' => env('REDIS_PASSWORD', null),
-            'port' => env('REDIS_PORT', 6379),
+            'host' => $redisserver, //env('REDIS_HOST', '127.0.0.1'),
+            'password' => $redispassword, //env('REDIS_PASSWORD', null),
+            'port' => $redisport, //env('REDIS_PORT', 6379),
             'database' => 0,
         ],
 
