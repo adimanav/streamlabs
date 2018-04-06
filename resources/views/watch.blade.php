@@ -106,11 +106,8 @@ END;
                         }
                         document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
                     }
-                    instanse = false;
                 }, "json");
-            }
-            else {
-                setTimeout(updateChat, pollingIntervalMillis);
+                instanse = false;
             }
         }
 
