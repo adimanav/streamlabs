@@ -90,7 +90,7 @@ if ($client->getAccessToken()) {
         $liveChatId = $videoResp['items'][0]['liveStreamingDetails']['activeLiveChatId'];
 
         $url = filter_var(
-            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
+            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $videoId,
             FILTER_SANITIZE_URL);
 
 ?><script type="text/javascript">alert("<?php echo $url; ?>");</script><?php
