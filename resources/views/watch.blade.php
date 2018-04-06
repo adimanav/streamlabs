@@ -93,7 +93,7 @@ END;
         function updateChat(){
             if(!instanse){
                 instanse = true;
-                $.get("api/listmessages/$_GET['liveChatId']/" + nextPageToken, function (data, status) {
+                $.get("api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken, function (data, status) {
                     if (status == 'success') {
                         nextPageToken = data['nextPageToken'];
                         var items = data['items'];
