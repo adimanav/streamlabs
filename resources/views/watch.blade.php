@@ -114,19 +114,31 @@ END;
         }
 
     </script>
+    <style>
+        #chat-area {
+            text-align:left;
+            margin:0 auto;
+            margin-bottom:25px;
+            padding:10px;
+            background:#fff;
+            height:270px;
+            width:430px;
+            border:1px solid #ACD8F0;
+            overflow:auto; }
+    </style>
 </head>
-<body onload="setInterval('updateChat()', pollingIntervalMillis)">
+<body onload="updateChat()">
     <table>
         <tr>
             <td>
+                <div id="video-wrap">
   <?=$htmlBody?>
+                </div>
             </td>
             <td>
-  <div id="page-wrap">
-
-      <div id="chat-wrap"><div id="chat-area"></div></div>
-
-  </div>
+              <div id="page-wrap">
+                  <div id="chat-wrap"><div id="chat-area"></div></div>
+              </div>
             </td>
         </tr>
     </table>
