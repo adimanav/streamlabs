@@ -18,6 +18,6 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 //Route::middleware('auth:api')->get('/listmessages/{liveChatId, pageToken?}', 'ApiController@listMessages');
-Route::middleware('client_credentials')->get('/listmessages', function () {
+Route::get('/listmessages', function () {
     return response()->json(array('message' => 'hi'));
 });
