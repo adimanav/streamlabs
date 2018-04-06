@@ -14,12 +14,13 @@ class CreateLiveChatMessagesTable extends Migration
     public function up()
     {
         Schema::create('live_chat_messages', function (Blueprint $table) {
-            $table->increments('id');
             $table->timestamps();
+            $table->string('id');
             $table->string('live_chat_id');
             $table->string('author_channel_id');
             $table->string('message_text');
             $table->index(['live_chat_id', 'author_channel_id']);
+            $table->primary('id');
         });
     }
 
