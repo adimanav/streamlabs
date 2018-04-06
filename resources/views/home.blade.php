@@ -93,11 +93,8 @@ if ($client->getAccessToken()) {
             $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $videoId,
             FILTER_SANITIZE_URL);
 
-?><script type="text/javascript">alert("<?php echo $url; ?>");</script><?php
-
-        return redirect()->to($url);
-
-        //return redirect()->route('watch.liveChatId.videoId', ['liveChatId' => $liveChatId, 'videoId' => $streamName]);
+        echo "<script> location.href='$url'; </script>";
+        exit;
     }
     else {
         $htmlBody = <<<END
@@ -129,7 +126,6 @@ END;
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0;url=finalpage.html">
     <title>My Live Broadcasts</title>
 </head>
 <body>

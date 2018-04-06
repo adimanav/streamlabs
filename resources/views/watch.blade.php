@@ -83,7 +83,6 @@ END;
 <!doctype html>
 <html>
 <head>
-    <meta http-equiv="refresh" content="0;url=finalpage.html">
     <title>My Live Broadcasts</title>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
     <script type="text/javascript">
