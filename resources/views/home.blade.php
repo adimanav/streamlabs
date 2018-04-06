@@ -63,7 +63,6 @@ if ($client->getAccessToken()) {
     $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
         'id,snippet',
         array(
-            'broadcastStatus' => 'active',
             'mine' => true
         )
     );
