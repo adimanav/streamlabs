@@ -2,6 +2,25 @@
 
 session_start();
 
+$protocol = 'http://';
+if (isset($_SERVER['HTTPS']) &&
+    ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $protocol = 'https://';
+}
+else {
+    $protocol = 'http://';
+}
+
+
+function redirect($url) {
+    ob_start();
+    header('Location: '.$url);
+    ob_end_flush();
+    die();
+}
+
 /*
  * You can acquire an OAuth 2.0 client ID and client secret from the
  * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
@@ -16,7 +35,7 @@ $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
 $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 $client->setScopes('https://www.googleapis.com/auth/youtube');
-$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+$redirect = filter_var($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
     FILTER_SANITIZE_URL);
 $client->setRedirectUri($redirect);
 
@@ -41,60 +60,31 @@ if (isset($_SESSION[$tokenSessionKey])) {
 
 // Check to ensure that the access token was successfully acquired.
 if ($client->getAccessToken()) {
-    $htmlBody = <<<END
-<h3>Search for the channel first and then you will be able to select a live broadcast on that channel:</h3>
-<form method="GET">
-  <div>
-    Search Term: <input type="search" id="q" name="q" placeholder="Enter Search Term">
-  </div>
-  <div>
-    Max Results: <input type="number" id="maxResults" name="maxResults" min="1" max="50" step="1" value="25">
-  </div>
-  <input type="submit" value="Search">
-</form>
-END;
+    $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
+        'id,snippet',
+        array(
+            'broadcastStatus' => 'active'
+        )
+    );
 
-    if (isset($_GET['q'])) {
-        try {
+    if (count($bcastsResponse['items']) > 0) {
+        $item = $bcastsResponse['items'][0];
+        $liveChatId = $item['snippet']['liveChatId'];
+        $boundStreamId = $item['contentDetails']['boundStreamId'];
 
-            // Call the search.list method to retrieve results matching the specified
-            // query term.
-            $searchResponse = $youtube->search->listSearch('id,snippet', array(
-            'q' => $_GET['q'],
-            'maxResults' => $_GET['maxResults'],
-            ));
+        $streamsResp = $youtube->liveStreams->listLiveStreams(
+            'id,snippet',
+            array(
+                'id' => $boundStreamId
+            )
+        );
+        $streamName = $streamsResp['cdn']['ingestionInfo']['streamName'];
 
-            $channels = '';
+        $url = filter_var(
+            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
+            FILTER_SANITIZE_URL);
 
-            // Add each result to the appropriate list, and then display the lists of
-            // matching videos, channels, and playlists.
-
-            $htmlBody .= <<<END
-            <h3>Channels</h3>
-            <ul>
-END;
-            foreach ($searchResponse['items'] as $searchResult) {
-                switch ($searchResult['id']['kind']) {
-                    case 'youtube#channel':
-                        $ref = filter_var('http://' . $_SERVER['HTTP_HOST'] . "/broadcasts?q=". $searchResult['id']['channelId'], FILTER_SANITIZE_URL);
-                        $title = $searchResult['snippet']['title'];
-                        $htmlBody .= <<<END
-                        <li><a href='$ref'>$title</a></li>
-END;
-                    break;
-                }
-            }
-
-            $htmlBody .= <<<END
-            </ul>
-END;
-        } catch (Google_Service_Exception $e) {
-        $htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
-        htmlspecialchars($e->getMessage()));
-        } catch (Google_Exception $e) {
-        $htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
-        htmlspecialchars($e->getMessage()));
-        }
+        $redirect($url);
     }
 } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
   $htmlBody = <<<END

@@ -2,6 +2,17 @@
 
 session_start();
 
+$protocol = 'http://';
+if (isset($_SERVER['HTTPS']) &&
+    ($_SERVER['HTTPS'] == 'on' || $_SERVER['HTTPS'] == 1) ||
+    isset($_SERVER['HTTP_X_FORWARDED_PROTO']) &&
+    $_SERVER['HTTP_X_FORWARDED_PROTO'] == 'https') {
+    $protocol = 'https://';
+}
+else {
+    $protocol = 'http://';
+}
+
 /*
  * You can acquire an OAuth 2.0 client ID and client secret from the
  * {{ Google Cloud Console }} <{{ https://cloud.google.com/console }}>
@@ -55,7 +66,7 @@ if ($client->getAccessToken()) {
                 $bcastsResponse = $youtube->liveBroadcasts->listLiveBroadcasts(
                     'id,snippet',
                     array(
-                        'id' => $broadcastItem['id']['videoId']
+                        'broadcastStatus' => 'active'
                     )
                 );
 
