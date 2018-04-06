@@ -1,4 +1,6 @@
 <?php
+namespace App\Http\Controllers;
+
 use app\LiveChatMessage;
  
 class ApiController extends Controller
