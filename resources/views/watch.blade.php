@@ -89,12 +89,14 @@ END;
         var instanse = false;
         var nextPageToken = "";
         var pollingIntervalMillis = 3000;
+        var currdata;
 
         function updateChat(){
             if(!instanse){
                 instanse = true;
                 $.get("api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken, function (data, status) {
                     if (status == 'success') {
+                        currdata = data;
                         nextPageToken = data['nextPageToken'];
                         var items = data['items'];
                         for (var item in items) {
