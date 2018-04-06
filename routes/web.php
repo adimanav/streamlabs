@@ -19,6 +19,6 @@ Route::get('/broadcasts', function () {
     return view('broadcasts');
 });
 
-Route::get('/watch/{liveChatId}/{videoId}', function () {
+Route::get('/watch', function () {
     return view('watch');
 });
