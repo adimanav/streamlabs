@@ -53,7 +53,7 @@ namespace App\Http\Controllers {
                     'id' => $responseItem['id'],
                     'liveChatId' => $responseItem['snippet']['liveChatId'],
                     'authorChannelId' => $responseItem['snippet']['authorChannelId'],
-                    'messageText' => $responseItem['textMessageDetails']['messageText']
+                    'messageText' => $responseItem['snippet']['displayMessage']
                 );
                 array_push($result['items'], $msg);
             }
