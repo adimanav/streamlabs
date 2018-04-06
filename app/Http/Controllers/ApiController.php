@@ -14,20 +14,20 @@ namespace App\Http\Controllers {
             $OAUTH2_CLIENT_SECRET = 'z2v75CLEqjxdD9Pv0u7ddftD';
 
             $client = new \Google_Client();
-//        $client->setClientId($OAUTH2_CLIENT_ID);
-//        $client->setClientSecret($OAUTH2_CLIENT_SECRET);
-//        $client->setScopes('https://www.googleapis.com/auth/youtube');
-//        $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-//            FILTER_SANITIZE_URL);
-//        $client->setRedirectUri($redirect);
-//
-//        // Define an object that will be used to make all API requests.
-//        $youtube = new \Google_Service_YouTube($client);
-//
-//        $tokenSessionKey = 'token-' . $client->prepareScopes();
-//        if (isset($_SESSION[$tokenSessionKey])) {
-//            $client->setAccessToken($_SESSION[$tokenSessionKey]);
-//        }
+        $client->setClientId($OAUTH2_CLIENT_ID);
+        $client->setClientSecret($OAUTH2_CLIENT_SECRET);
+        $client->setScopes('https://www.googleapis.com/auth/youtube');
+        $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+            FILTER_SANITIZE_URL);
+        $client->setRedirectUri($redirect);
+
+        // Define an object that will be used to make all API requests.
+        $youtube = new \Google_Service_YouTube($client);
+
+        $tokenSessionKey = 'token-' . $client->prepareScopes();
+        if (isset($_SESSION[$tokenSessionKey])) {
+            $client->setAccessToken($_SESSION[$tokenSessionKey]);
+        }
 
             // Check to ensure that the access token was successfully acquired.
 //        if ($client->getAccessToken()) {
