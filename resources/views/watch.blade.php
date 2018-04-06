@@ -98,7 +98,7 @@ END;
                     if (status == 'success') {
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
-                        pollingIntervalMillis = data['pollingIntervalMillis']
+                        pollingIntervalMillis = data['pollingIntervalMillis'];
                         var items = data['items'];
                         for (var i = 0; i < items.length; i++) {
                             var item = items[i];
@@ -128,7 +128,7 @@ END;
             overflow:auto; }
     </style>
 </head>
-<body onload="setInterval('updateChat()', pollingIntervalMillis)">
+<body onload="updateChat(); setInterval('updateChat()', pollingIntervalMillis)">
     <table>
         <tr>
             <td>
