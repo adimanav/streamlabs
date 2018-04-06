@@ -1,36 +1,38 @@
 <?php
-namespace App\Http\Controllers;
+namespace {
+    require_once 'vendor/autoload.php';
+}
 
-use app\LiveChatMessage;
- 
-class ApiController extends Controller
-{
-    public function listMessages($liveChatId, $pageToken="")
+namespace App\Http\Controllers {
+
+    use app\LiveChatMessage;
+
+    class ApiController extends Controller
     {
-        session_start();
+        public function listMessages($liveChatId, $pageToken = "")
+        {
+            $result = array();
 
-        $result = array();
+            $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
+            $OAUTH2_CLIENT_SECRET = 'z2v75CLEqjxdD9Pv0u7ddftD';
 
-        $OAUTH2_CLIENT_ID = '598074830904-mcrdtbi7b6vs866c400k9fcqk5h0bgd4.apps.googleusercontent.com';
-        $OAUTH2_CLIENT_SECRET = 'z2v75CLEqjxdD9Pv0u7ddftD';
+            $client = new \Google_Client();
+        $client->setClientId($OAUTH2_CLIENT_ID);
+        $client->setClientSecret($OAUTH2_CLIENT_SECRET);
+        $client->setScopes('https://www.googleapis.com/auth/youtube');
+        $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+            FILTER_SANITIZE_URL);
+        $client->setRedirectUri($redirect);
 
-//        $client = new Google_Client();
-//        $client->setClientId($OAUTH2_CLIENT_ID);
-//        $client->setClientSecret($OAUTH2_CLIENT_SECRET);
-//        $client->setScopes('https://www.googleapis.com/auth/youtube');
-//        $redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
-//            FILTER_SANITIZE_URL);
-//        $client->setRedirectUri($redirect);
-//
-//        // Define an object that will be used to make all API requests.
-//        $youtube = new Google_Service_YouTube($client);
-//
-//        $tokenSessionKey = 'token-' . $client->prepareScopes();
-//        if (isset($_SESSION[$tokenSessionKey])) {
-//            $client->setAccessToken($_SESSION[$tokenSessionKey]);
-//        }
+        // Define an object that will be used to make all API requests.
+        $youtube = new \Google_Service_YouTube($client);
 
-        // Check to ensure that the access token was successfully acquired.
+        $tokenSessionKey = 'token-' . $client->prepareScopes();
+        if (isset($_SESSION[$tokenSessionKey])) {
+            $client->setAccessToken($_SESSION[$tokenSessionKey]);
+        }
+
+            // Check to ensure that the access token was successfully acquired.
 //        if ($client->getAccessToken()) {
 //            $arr = array();
 //            if ($pageToken !== "") {
@@ -56,7 +58,8 @@ class ApiController extends Controller
 //            }
 //        }
 
-        return response()->json($result);
+            return response()->json($result);
+        }
     }
 }
 ?>
