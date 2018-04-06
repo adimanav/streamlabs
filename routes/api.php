@@ -17,4 +17,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/listmessages{liveChatId, pageToken}', 'ApiController@listMessages');
+Route::middleware('auth:api')->get('/listmessages{liveChatId, pageToken}', 'ApiController@listMessages');

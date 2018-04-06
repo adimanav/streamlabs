@@ -22,5 +22,3 @@ Route::get('/broadcasts', function () {
 Route::get('/watch', function () {
     return view('watch');
 });
-
-Route::get('/listmessages{liveChatId, pageToken}', 'ApiController@listMessages');
