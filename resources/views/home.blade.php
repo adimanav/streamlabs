@@ -85,7 +85,7 @@ if ($client->getAccessToken()) {
 //        $url = filter_var(
 //            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
 //            FILTER_SANITIZE_URL);
-        return redirect()->route('watch', ['liveChatId' => $liveChatId, 'videoId' => $streamName]);
+//        return redirect()->route('watch', ['liveChatId' => $liveChatId, 'videoId' => $streamName]);
     }
 } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
   $htmlBody = <<<END
