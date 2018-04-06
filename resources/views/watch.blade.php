@@ -97,7 +97,7 @@ END;
                     if (status == 'success') {
                         nextPageToken = data['nextPageToken'];
                         var items = data['items'];
-                        for (item in items) {
+                        for (var item in items) {
                             $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
                         }
                         document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
