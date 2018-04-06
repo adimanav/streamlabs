@@ -54,7 +54,7 @@ class ApiController extends Controller
 //                );
 //                array_push($result['items'], $msg);
 //            }
-        }
+//        }
 
         return response()->json($result);
     }
