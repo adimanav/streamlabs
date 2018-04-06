@@ -30,30 +30,30 @@ namespace App\Http\Controllers {
         }
 
             // Check to ensure that the access token was successfully acquired.
-//        if ($client->getAccessToken()) {
-//            $arr = array();
-//            if ($pageToken !== "") {
-//                $arr['pageToken'] = $pageToken;
-//            }
-//            $response = $youtube->liveChatMessages->listLiveChatMessages(
-//                $liveChatId, 'id,snippet', $arr);
-//
-//            $result = [
-//                'nextPageToken' => $response['nextPageToken'],
-//                'pollingIntervalMillis' => $response['pollingIntervalMillis'],
-//                'items' => array()
-//            ];
-//
-//            foreach ($response['items'] as $responseItem) {
-//                $msg = array(
-//                    'id' => $responseItem['id'],
-//                    'liveChatId' => $responseItem['snippet']['liveChatId'],
-//                    'authorChannelId' => $responseItem['snippet']['authorChannelId'],
-//                    'messageText' => $responseItem['textMessageDetails']['messageText']
-//                );
-//                array_push($result['items'], $msg);
-//            }
-//        }
+        if ($client->getAccessToken()) {
+            $arr = array();
+            if ($pageToken !== "") {
+                $arr['pageToken'] = $pageToken;
+            }
+            $response = $youtube->liveChatMessages->listLiveChatMessages(
+                $liveChatId, 'id,snippet', $arr);
+
+            $result = [
+                'nextPageToken' => $response['nextPageToken'],
+                'pollingIntervalMillis' => $response['pollingIntervalMillis'],
+                'items' => array()
+            ];
+
+            foreach ($response['items'] as $responseItem) {
+                $msg = array(
+                    'id' => $responseItem['id'],
+                    'liveChatId' => $responseItem['snippet']['liveChatId'],
+                    'authorChannelId' => $responseItem['snippet']['authorChannelId'],
+                    'messageText' => $responseItem['textMessageDetails']['messageText']
+                );
+                array_push($result['items'], $msg);
+            }
+        }
 
             return response()->json($result);
         }
