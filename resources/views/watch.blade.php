@@ -101,7 +101,7 @@ END;
                         var items = data['items'];
                         for (var i = 0; i < items.length; i++) {
                             var item = items[i];
-                            $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
+                            $('#chat-area').append($("<p>" + item['authorName'] + ": " + item['messageText'] + "</p>"));
                         }
                         document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
                     }
