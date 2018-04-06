@@ -127,7 +127,7 @@ END;
             overflow:auto; }
     </style>
 </head>
-<body onload="updateChat()">
+<body onload="setInterval('updateChat()', pollingIntervalMillis)">
     <table>
         <tr>
             <td>
