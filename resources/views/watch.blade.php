@@ -99,7 +99,7 @@ END;
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
                         var items = data['items'];
-                        for (var i = 0; i < Array.length(items); i++) {
+                        for (var i = 0; i < items.length; i++) {
                             var item = items[i];
                             $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
                         }
