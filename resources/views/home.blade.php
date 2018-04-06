@@ -82,10 +82,10 @@ if ($client->getAccessToken()) {
         );
         $streamName = $streamsResp['cdn']['ingestionInfo']['streamName'];
 
-        $url = filter_var(
-            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
-            FILTER_SANITIZE_URL);
-        return redirect($url);
+//        $url = filter_var(
+//            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $streamName,
+//            FILTER_SANITIZE_URL);
+        return redirect()->route('watch', ['liveChatId' => $liveChatId, 'videoId' => $streamName]);
     }
     else {
         $htmlBody = <<<END
