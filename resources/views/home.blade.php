@@ -87,6 +87,11 @@ if ($client->getAccessToken()) {
 //            FILTER_SANITIZE_URL);
 //        return redirect()->route('watch', ['liveChatId' => $liveChatId, 'videoId' => $streamName]);
     }
+    else {
+        $htmlBody = <<<END
+<p> No broadcasts found! <p>
+END;
+        }
 } elseif ($OAUTH2_CLIENT_ID == 'REPLACE_ME') {
   $htmlBody = <<<END
   <h3>Client Credentials Required</h3>
