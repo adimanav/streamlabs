@@ -15,10 +15,10 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::get('/broadcasts', function () {
+Route::get('broadcasts', function () {
     return view('broadcasts');
 });
 
-Route::get('/watch', function () {
+Route::get('watch/{liveChatId}/{videoId}', function () {
     return view('watch');
 });
