@@ -84,8 +84,40 @@ END;
 <html>
 <head>
 <title>My Live Broadcasts</title>
+    <script type="text/javascript">
+        var instanse = false;
+        var nextPageToken = "";
+        var pollingIntervalMillis = 3000;
+
+        function updateChat(){
+            if(!instanse){
+                instanse = true;
+                $.get("api/listmessages/$_GET['liveChatId']/" + nextPageToken, function (data, status) {
+                    if (status == 'success') {
+                        nextPageToken = data['nextPageToken'];
+                        var items = data['items'];
+                        for (item in items) {
+                            $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
+                        }
+                        document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+                    }
+                    instanse = false;
+                });
+            }
+            else {
+                setTimeout(updateChat, pollingIntervalMillis);
+            }
+        }
+
+    </script>
 </head>
-<body>
+<body onload="setInterval('updateChat()', pollingIntervalMillis)">
   <?=$htmlBody?>
+  <div id="page-wrap">
+
+      <div id="chat-wrap"><div id="chat-area"></div></div>
+
+  </div>
+
 </body>
 </html>
