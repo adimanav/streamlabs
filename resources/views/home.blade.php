@@ -73,7 +73,6 @@ if ($client->getAccessToken()) {
         'eventType' => 'live',
         'type' => 'video',
         'maxResults' => 1,
-        'order' => 'rating',
     ));
 
     if (count($broadcastsResponse['items']) > 0) {
