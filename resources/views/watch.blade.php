@@ -106,8 +106,10 @@ END;
             if(!instanse){
                 instanse = true;
                 var url = "<?php echo "https://" . $_SERVER['HTTP_HOST']; ?>" + "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
-                $.get(url, function (data, status) {
-                    if (status == 'success') {
+                $.ajax({
+                    url: url,
+                    dataType: "jsonp",
+                    success: function (data) {
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
                         pollingIntervalMillis = data['pollingIntervalMillis'];
@@ -118,7 +120,7 @@ END;
                         }
                         document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
                     }
-                }, "json");
+                });
                 instanse = false;
             }
         }
