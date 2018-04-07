@@ -105,7 +105,7 @@ END;
         function updateChat(){
             if(!instanse){
                 instanse = true;
-                var url = "<?php echo "https://" . $_SERVER['HTTP_HOST']; ?>" + "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
+                var url = "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
                 $.ajax({
                     type: "GET",
                     url: url,
