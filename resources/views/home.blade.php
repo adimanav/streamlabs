@@ -90,7 +90,7 @@ if ($client->getAccessToken()) {
         $liveChatId = $videoResp['items'][0]['liveStreamingDetails']['activeLiveChatId'];
 
         $url = filter_var(
-            $protocol . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $videoId,
+            "http://" . $_SERVER['HTTP_HOST'] . "/watch?liveChatId=". $liveChatId . "&videoId=" . $videoId,
             FILTER_SANITIZE_URL);
 
         echo "<script> location.href='$url'; </script>";
