@@ -109,7 +109,7 @@ END;
                 $.ajax({
                     type: "GET",
                     url: url,
-                    dataType: "jsonp",
+                    dataType: "json",
                     success: function (data) {
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
