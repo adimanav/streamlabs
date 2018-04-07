@@ -27,7 +27,7 @@ $client = new Google_Client();
 $client->setClientId($OAUTH2_CLIENT_ID);
 $client->setClientSecret($OAUTH2_CLIENT_SECRET);
 $client->setScopes('https://www.googleapis.com/auth/youtube');
-$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+$redirect = filter_var($protocol . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
     FILTER_SANITIZE_URL);
 $client->setRedirectUri($redirect);
 
@@ -105,7 +105,8 @@ END;
         function updateChat(){
             if(!instanse){
                 instanse = true;
-                $.get("api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken, function (data, status) {
+                var url = "<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>" + "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken;
+                $.get(url, function (data, status) {
                     if (status == 'success') {
                         currdata = data;
                         nextPageToken = data['nextPageToken'];
