@@ -111,7 +111,7 @@ END;
                     dataType: "json",
                     success: function (data) {
                         nextPageToken = data['nextPageToken'];
-                        pollingIntervalMillis = data['pollingIntervalMillis'];
+                        pollingIntervalMillis = data['pollingIntervalMillis'] + 1000;
                         var items = data['items'];
                         for (var i = 0; i < items.length; i++) {
                             var item = items[i];
