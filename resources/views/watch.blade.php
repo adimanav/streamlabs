@@ -105,7 +105,7 @@ END;
         function updateChat(){
             if(!instanse){
                 instanse = true;
-                var url = "<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>" + "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken;
+                var url = "<?php echo $protocol . $_SERVER['HTTP_HOST']; ?>" + "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
                 $.get(url, function (data, status) {
                     if (status == 'success') {
                         currdata = data;
