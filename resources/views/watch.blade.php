@@ -99,28 +99,30 @@ END;
     <script type="text/javascript">
         var nextPageToken = "";
         var pollingIntervalMillis = 4000;
+        var instance = false;
 
         function updateChat(){
-            var url = "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
-            $.ajax({
-                type: "GET",
-                url: url,
-                dataType: "json",
-                success: function (data) {
-                    nextPageToken = data['nextPageToken'];
-                    pollingIntervalMillis = data['pollingIntervalMillis'];
-                    var items = data['items'];
-                    for (var i = 0; i < items.length; i++) {
-                        var item = items[i];
-                        $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
-                    }
-                    document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
-                    setTimeout(updateChat, pollingIntervalMillis);
-                },
-                error: function () {
-                    setTimeout(updateChat, pollingIntervalMillis);
-                }
-            });
+            if (!instance) {
+                instance = true;
+                var url = "/api/listmessages/<?php echo $_GET['liveChatId']; ?>/" + nextPageToken + "/";
+                $.ajax({
+                    type: "GET",
+                    url: url,
+                    dataType: "json",
+                    success: function (data) {
+                        nextPageToken = data['nextPageToken'];
+                        pollingIntervalMillis = data['pollingIntervalMillis'];
+                        var items = data['items'];
+                        for (var i = 0; i < items.length; i++) {
+                            var item = items[i];
+                            $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
+                        }
+                        document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+                    },
+                });
+                setTimeout(updateChat, pollingIntervalMillis);
+                instance = false;
+            }
         }
 
     </script>
