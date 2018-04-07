@@ -115,9 +115,12 @@ END;
                         $('#chat-area').append($("<p>" + item['authorChannelId'] + ": " + item['messageText'] + "</p>"));
                     }
                     document.getElementById('chat-area').scrollTop = document.getElementById('chat-area').scrollHeight;
+                    setTimeout(updateChat, pollingIntervalMillis);
+                },
+                error: function () {
+                    setTimeout(updateChat, pollingIntervalMillis);
                 }
             });
-            setTimeout(updateChat(), pollingIntervalMillis);
         }
 
     </script>
